@@ -5,6 +5,18 @@
 		'use strict';
 
 
+				var $search_opener = $('#search_opener');
+				var $search_form = $('#search_form');
+				var $close_search_form = $('#close_search_form');
+				$search_opener.on('click', function(){
+					$search_form.addClass('search_form_visible');
+				});
+				$close_search_form.on('click', function(){
+					$search_form.removeClass('search_form_visible');
+				});
+
+
+
 
 				var $navigation_menu = $('#navigation_menu');
 				var $menu_button = $('#menu_button');
@@ -21,7 +33,9 @@
 					if(e.keyCode == 27 ){
 						$navigation_menu.removeClass('menu_visible');
 
-				 		$('.search_box').removeClass('visible');
+						$search_form.removeClass('search_form_visible');
+
+
 					}
 
 				})
