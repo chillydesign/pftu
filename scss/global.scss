@@ -20,10 +20,12 @@ body {
 
 /*TYPOGRAPHY*/
 
-h1 {font-size: 3.9em; padding:50px 0 50px;font-weight: normal;}
+h1, h2, h3, h4, h5, h6 {line-height: 160%;}
+
+h1 {font-size: 2em; padding:25px 0;font-weight: bold;}
 h2 {font-size: 2.9em; padding: 0 0 20px;font-weight: bold}
 h3 {font-size: 2.21em;padding:0 0 20px;}
-h4 {font-size: 1.69em;padding:0 0 10px;font-weight: bold;text-transform: uppercase}
+h4 {font-size: 1.69em;padding:0 0 10px;font-weight: normal;}
 
 p { font-size: 1.5em;padding:0 0 30px;line-height: 160%;  }
 li { font-size: 1.5em;padding:0 0 5px;line-height: 160%  }
@@ -36,10 +38,10 @@ ul ul , ul ol, ol ol {font-size: inherit}
 
 
 @media (min-width: 768px){
-	h1 {font-size: 5em;}
+	h1 {font-size: 2.5em;}
 	h2 {font-size: 3.1em}
 	h3 {font-size: 2.41em}
-	h4 {font-size: 1.79em}
+	h4 {font-size: 2.1em}
 
 }
 
@@ -50,7 +52,6 @@ ul ul , ul ol, ol ol {font-size: inherit}
 
 a {
 	text-decoration: none;
-	border-bottom: 1px dotted $primary-color;
 	display: inline-block;
 	border-radius:3px;
 	@include transition(0.3s);
@@ -60,7 +61,6 @@ a {
 		color: $primary-color
 	}
 	&:hover {
-		border-bottom: 1px solid $primary-color;
 		background-color: transparentize($primary-color,0.8)
 	}
 }
@@ -90,3 +90,19 @@ blockquote {
 blockquote p:last-child {padding-bottom: 0}
 
 input {padding: 10px;width: 100%;font-size: 1.5em;appearance:none;}
+
+.title_image {
+	background-size: cover;
+	padding: 90px 25px;
+}
+
+.title_background {
+	background-color: transparentize($primary-color,0.2);
+	color:white;
+	width: 80vw;
+	max-width: 1000px;
+	min-width: 250px;
+    margin: auto;
+    text-align: center;
+    padding: 50px 35px;
+}
