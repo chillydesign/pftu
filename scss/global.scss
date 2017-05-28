@@ -26,9 +26,10 @@ h1, h2, h3, h4, h5, h6 {line-height: 160%;}
 
 h1 {font-size: 2em; padding:25px 0;font-weight: bold;}
 h2 {font-size: 2.9em; padding: 0 0 20px;font-weight: bold; text-transform:uppercase; position: relative;}
-h3 {font-size: 2.21em;padding:0 0 20px;}
+h2:before {content: ''; display: block;border-top: solid 3px white; position: relative; top: 33px;}
+h3 {font-size: 2.21em; padding: 12px 0 20px; font-weight:bold;}
 h4 {font-size: 1.69em;padding:0 0 10px;font-weight: normal;}
-h6 {font-size: 1.8em;}
+h6 {font-size: 1.8em; display: inline-block; margin-right: 20px;}
 h6 a {border: solid 3px; padding: 5px 25px; color: $black!important; font-weight: bold;}
 
 p { font-size: 1.8em;padding:0 0 30px;line-height: 160%;  }
@@ -42,7 +43,6 @@ ul ul , ul ol, ol ol {font-size: inherit}
 @media (min-width: 768px){
 	h1 {font-size: 2.5em;}
 	h2 {font-size: 4.5em;}
-	h2:before {content: ''; display: block;border-top: solid 3px white; position: relative; top: 32px;}
 	h3 {font-size: 2.41em;}
 	h4 {font-size: 2.1em;}
 
@@ -94,11 +94,16 @@ blockquote p:last-child {padding-bottom: 0}
 
 input {padding: 10px;width: 100%;font-size: 1.5em;appearance:none;}
 
+img {
+	width: 100%;
+	height: auto;
+	margin: 0;
+}
+
 .title_image {
 	background-size: cover;
 	background-position: center bottom;
 	padding: 120px 25px;
-	border-bottom: solid 20px $black;
 }
 
 .title_background {
@@ -112,18 +117,32 @@ input {padding: 10px;width: 100%;font-size: 1.5em;appearance:none;}
     padding: 60px 35px;
 }
 
-
-
-
-.bigcol, .smallcol {
-    padding: 50px 25px;
+.border {
+	border-bottom: solid 20px;
+}
+.blackborder {
+	border-color: $black;
+}
+.redborder {
+	border-color: darken($primary-color, 10);
 }
 
-.primary {background-color: $primary-color;}
-.dark_primary {background-color: darken($primary-color, 20);}
+.bigcol, .smallcol {
+    padding: 30px 25px;
+}
+
+.primary {
+	background-color: $primary-color;
+	h2:before {border-color: $primary-color}
+}
+.dark_primary {
+	background-color: darken($primary-color, 20);
+	h2:before {border-color: darken($primary-color, 20);}
+}
 .primary, .dark_primary {
 	color: white;
 	a, h6 a {color: white !important;}
+
 }
 
 

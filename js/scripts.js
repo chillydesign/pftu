@@ -57,6 +57,9 @@
 
 
 
+		$('.section_two_thirds_one_third').each(function(){
+			$(this).find('.thirdscol').matchHeight();
+		})
 
 
 	});

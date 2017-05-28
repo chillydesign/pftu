@@ -7,12 +7,12 @@
 	<div class="row">
 
 
-		<div class="<?php echo $classes[0] . ' ' . $bg_big; ?> bigcol">
+		<div class="<?php echo $classes[0] . ' ' . $bg_big; ?> bigcol thirdscol">
 		<?php echo get_sub_field('two_thirds_content'); ?>
 		</div>
 
 
-		<div class="<?php echo $classes[1] . ' ' . $bg_small; ?> smallcol">
+		<div class="<?php echo $classes[1] . ' ' . $bg_small; ?> smallcol thirdscol">
 			<?php echo get_sub_field('one_third_content'); ?>
 		</div>
 
