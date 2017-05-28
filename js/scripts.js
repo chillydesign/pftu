@@ -4,6 +4,8 @@
 
 		'use strict';
 
+		var $window  = $(window);
+
 
 		// SEARCH BOX
 		var $search_opener = $('#search_opener');
@@ -40,10 +42,12 @@
 
 
 
+
+		var $slide_count = Math.floor( $window.width() / 260  );
 		$('#partners_slider').bxSlider({
-			minSlides: 3,
-			maxSlides: 5,
-			slideWidth: 300,
+			minSlides: $slide_count,
+			maxSlides: $slide_count,
+			slideWidth: 260,
 			slideMargin: 10,
 			auto: true,
 			controls: true,

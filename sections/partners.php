@@ -1,4 +1,6 @@
-<h3>Partenaires</h3>
+<h2>Partenaires</h2>
+
+<div id="partners_outer">
 <ul id="partners_slider" class="bxslider">
 
 	<?php $partenaires = get_posts( array('post_type' => 'partenaire', 'posts_per_page'=> -1 )); ?>
@@ -18,3 +20,4 @@
 
 
 	</ul>
+</div>

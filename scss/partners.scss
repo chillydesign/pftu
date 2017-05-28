@@ -1,7 +1,29 @@
+.section_partners {
+
+   h2 {
+     text-align: center;
+   }
+}
+
+
+#partners_outer {
+  width: 80%;
+  margin: 0 10%;
+}
+
 #partners_slider {
+
+  width: 100%;
+
+  li {
+    margin:0;
+  }
 
   a  {
     display: block;
+    &:hover {
+      background:none
+    }
   }
   .partenaire_inner {
       background-repeat: no-repeat;
