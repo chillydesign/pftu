@@ -6,17 +6,30 @@ header {
 
 	#logo {
 		text-indent: -9999px;
-		display: inline-block;
-		background: url('../img/logo-mobile.jpg');
-		width:80%;
-		height: 100px;
-		background-size: contain;
+	    display: inline-block;
+	    background: url(../img/logo-mobile.jpg);
+	    width: 700px;
+	    height: 67px;
+	    background-size: contain;
+	    background-repeat: no-repeat;
+	    margin: 25px;
+	    border-bottom: 0;
 
 	}
 
-	#searchbar {
 
-		margin-left: auto
+
+	#search_opener {
+		margin: 25px 25px 25px auto;
+		height: 40px;
+		width: 40px;
+		border-radius: 50%;
+		background-color: $black;
+		background-image: url(../img/magnifyingglass.jpg);
+		background-repeat: no-repeat;
+		background-size: 15px;
+		background-position: center;
+		padding-right: 25px;
 	}
 
 
@@ -25,6 +38,31 @@ header {
 
 nav {
 	background: $black;
+
+	ul{
+		list-style: none;
+
+		li{
+			display: inline-block;
+
+			a{
+				
+				display: inline-block;
+				padding:8px 15px;
+				text-decoration: none;
+				
+
+
+				&:link, &:active, &:visited{
+					color:white;
+				}
+
+				&:hover{
+					color: white;
+				}
+			}
+		}
+	}
 
 }
 

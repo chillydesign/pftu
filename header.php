@@ -28,7 +28,8 @@
 
 	
 
-				<div id="searchbar"><?php get_template_part('searchform'); ?></div>
+				<a id="search_opener"></a>
+				<!-- <div id="searchbar"><?php // get_template_part('searchform'); ?></div> -->
 
 			</header>
 
