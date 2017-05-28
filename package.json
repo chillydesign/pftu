@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/chillydesign/blanktheme#readme",
   "dependencies": {
-
+    "bxslider": "^4.2.11"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
