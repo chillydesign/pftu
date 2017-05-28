@@ -36,8 +36,9 @@
 
 
 					<!-- nav -->
-					<nav class="nav" role="navigation">
+					<nav id="nav" role="navigation">
 
-						<div class="cdwrapper"><a href="#" id="mobile_nav_button">Menu</a><?php webfactor_nav(); ?></div>
+							<a href="#" id="mobile_nav_button">Menu</a>
+							<?php webfactor_nav(); ?>
 					</nav>
 					<!-- /nav -->
