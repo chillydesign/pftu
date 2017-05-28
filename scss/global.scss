@@ -93,7 +93,9 @@ input {padding: 10px;width: 100%;font-size: 1.5em;appearance:none;}
 
 .title_image {
 	background-size: cover;
-	padding: 90px 25px;
+	background-position: center bottom;
+	padding: 120px 25px;
+	border-bottom: solid 20px $black;
 }
 
 .title_background {
@@ -104,5 +106,5 @@ input {padding: 10px;width: 100%;font-size: 1.5em;appearance:none;}
 	min-width: 250px;
     margin: auto;
     text-align: center;
-    padding: 50px 35px;
+    padding: 60px 35px;
 }
