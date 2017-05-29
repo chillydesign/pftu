@@ -31,6 +31,7 @@ footer a {
 	padding: 35px 25px 45px;
 	border-bottom: solid 3px white;
 	text-transform: uppercase;
+	position: relative;
 
 	nav ul {
 		list-style: none;
@@ -73,3 +74,8 @@ footer a {
 	z-index: 2;
 	a:link, a:visited, a:active {color: white;}
 }
+
+@media (max-width: 768px) {
+	.interreg {margin-top: 40px; text-align: left !important;}
+}
+
