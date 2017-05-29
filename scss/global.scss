@@ -6,6 +6,7 @@
 @import 'footer';
 @import 'bxslider';
 @import 'partners';
+@import 'news';
 
 
 
@@ -33,6 +34,7 @@ h6 {font-size: 1.8em; display: inline-block; margin-right: 20px;}
 h6 a {border: solid 3px; padding: 5px 25px; color: $black!important; font-weight: bold;}
 
 p { font-size: 1.8em;padding:0 0 30px;line-height: 160%;  }
+p.meta {color: lighten($font-color,20);font-style: italic;}
 li { font-size: 1.8em;padding:0 0 5px;line-height: 160%; list-style: circle; margin-left: 35px;}
 ul {margin-bottom: 30px;}
 
@@ -146,8 +148,6 @@ img {
 }
 
 
-
-
-
-
-
+.min_height_browser {
+	min-height: 90vh;
+}

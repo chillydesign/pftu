@@ -1,10 +1,10 @@
 <?php get_header(); ?>
 
-	
-		<!-- section -->
-		<section>
 
-			<h1><?php _e( 'Archives', 'webfactor' ); ?></h1>
+		<!-- section -->
+		<section class="container min_height_browser">
+
+			<h2><?php _e( 'Archives', 'webfactor' ); ?></h2>
 
 			<?php get_template_part('loop'); ?>
 
@@ -12,8 +12,8 @@
 
 		</section>
 		<!-- /section -->
-	
 
-<?php get_sidebar(); ?>
+
+
 
 <?php get_footer(); ?>

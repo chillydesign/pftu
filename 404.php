@@ -2,7 +2,7 @@
 
 
 		<!-- section -->
-		<section>
+		<section class="container min_height_browser">
 
 			<!-- article -->
 			<article id="post-404">
@@ -19,6 +19,5 @@
 		<!-- /section -->
 
 
-<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>

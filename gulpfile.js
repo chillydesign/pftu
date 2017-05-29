@@ -43,9 +43,5 @@ gulp.task('compress', function() {
 // Run all Gulp tasks and serve application
 gulp.task('default', ['heya', 'sass', 'compress'], function() {
   gulp.watch('scss/**/*.scss', ['sass']);
-<<<<<<< Updated upstream
 //  gulp.watch('js/**/*.js',  ['compress'] );
-=======
-  //gulp.watch('js/**/*.js',  ['compress'] );
->>>>>>> Stashed changes
 });

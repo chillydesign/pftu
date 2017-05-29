@@ -56,6 +56,18 @@
 		});
 
 
+		$('#news_slider').bxSlider({
+			minSlides: 1,
+			maxSlides: 1,
+			auto: false,
+			controls: true,
+			autoControls: false,
+			pager: false
+		});
+
+
+
+
 
 		$('.section_two_thirds_one_third').each(function(){
 			$(this).find('.thirdscol').matchHeight();
