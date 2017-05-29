@@ -2,15 +2,74 @@
 
 /*FOOTER*/
 footer {
-	background:#222;
-	color: #ddd;
-	padding:20px 0;
-	margin:20px 0 0;
+	background-image:url(../img/footermap.jpg);
+	background-size: cover;
+	position: relative;
+	color: white;
 }
+
+footer:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparentize($black, 0.5);
+}
+
 
 footer p {
 	padding:0
 }
 footer a {
 	color: white;
+}
+
+
+.footertop {
+	padding: 35px 25px 45px;
+	border-bottom: solid 3px white;
+	text-transform: uppercase;
+
+	nav ul {
+		list-style: none;
+		margin-bottom: 5px;
+		li {
+			list-style: none;
+			display: inline-block;
+			margin: 0;
+			a {
+				display: inline-block;
+				padding: 8px 20px 8px 0;
+				font-weight: bold;
+				color: white;
+			}
+		}
+		li:before {content: '|'; display: inline-block;  margin-right: 20px;}
+		li:first-child:before{content: '';  margin-right: 0px;}
+	}
+
+	#facebook {background-image :url(../img/facebook.png); background-repeat:  no-repeat; background-size: auto 100%;}
+	#twitter {background-image :url(../img/twitter.png); background-repeat:  no-repeat; background-size: auto 100%;}
+	#linkedin {background-image :url(../img/linkedin.png); background-repeat:  no-repeat; background-size: auto 100%;}
+	#facebook, #twitter, #linkedin {
+		width: 38px;
+		height: 35px; 
+		margin: 0 0 0 13px;
+		vertical-align: middle;
+	}
+
+	.interreg {display:block; text-align: right;}
+	.interreg img {
+	    max-width: 350px;
+	}
+}
+
+.footerbottom {
+	padding: 25px; 
+	text-align: center;
+	position: relative;
+	z-index: 2;
+	a:link, a:visited, a:active {color: white;}
 }

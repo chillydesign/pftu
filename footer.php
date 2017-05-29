@@ -1,9 +1,23 @@
 			<!-- footer -->
 			<footer class="footer" role="contentinfo">
 
-				<p class="container">
-					&copy; <?php echo date('Y'); ?> Copyright <?php bloginfo('name'); ?>. Website by <a href="//webfactor.ch" title="Webfactor">Webfactor</a>.
-				</p>
+				<div class="footertop">
+					<div class="row">
+						<div class="col-sm-8">
+							<nav><?php webfactor_footer_nav(); ?></nav>
+							<p><strong>Partager</strong> <a href="#" id="facebook"></a><a href="#" id="twitter"></a><a href="#" id="linkedin"></a></p>
+						</div>
+						<div class="col-sm-4">
+						<a href="#" class="interreg"><img alt="Un projeet Interreg" src="<?php echo get_template_directory_uri();?>/img/interreg-logo-grey.png"></a>
+						</div>
+					</div>
+				</div>
+				<div class="footerbottom">
+
+					<p>
+						&copy;  Copyright <?php bloginfo('name'); ?> <?php echo date('Y'); ?>| Website by <a href="//webfactor.ch" title="Webfactor"><strong>Webfactor</strong></a>.
+					</p>
+				</div>
 
 			</footer>
 			<!-- /footer -->
