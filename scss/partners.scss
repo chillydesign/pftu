@@ -1,4 +1,5 @@
 .section_partners {
+      padding-top: 30px;
 
    h2 {
      text-align: center;
@@ -37,4 +38,43 @@
   }
 
 
+}
+
+
+
+// FOR PARTNERS TEMPLATE PAGE
+.partners_container {
+  li.single_partner {
+    list-style: none;
+    font-size: inherit;
+    margin: 20px 0 40px;
+
+    .partner_image {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center center;
+      width: 80%;
+      margin:0 10% 30px;
+      height: 300px;
+      border:10px solid white;
+      outline:10px solid $light-grey;
+
+    }
+
+
+    h3 {
+
+    }
+     p {
+        font-size: 1.5em;
+     }
+
+  }
+}
+
+
+@media (min-width: 768px){
+  .text-align-right {
+    text-align: right;
+  }
 }

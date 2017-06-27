@@ -5,8 +5,7 @@
 @import 'header';
 @import 'footer';
 @import 'bxslider';
-@import 'partners';
-@import 'news';
+
 
 
 
@@ -152,9 +151,9 @@ img {
 .min_height_browser {
 	min-height: 90vh;
 }
-.section_partners {
-    padding-top: 30px;
-}
 
 
 
+@import 'partners';
+@import 'news';
+@import 'events';
