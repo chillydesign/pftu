@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div class="row">
-	<div class="col-sm-8 col-sm-push-2">
+	<div class="col-sm-10 col-sm-push-1">
 
 
 			<div class="full_width_inner">

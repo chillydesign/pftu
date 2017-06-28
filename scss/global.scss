@@ -33,7 +33,7 @@ h1:before , h2:before {content: ''; display: block;border-top: solid 3px white; 
 h3 {font-size: 2.21em; padding: 12px 0 20px; font-weight:bold;}
 h4 {font-size: 1.69em;padding:0 0 10px;font-weight: normal;color: $primary-color}
 h6 {font-size: 1.8em; display: inline-block; margin: 0 20px 20px 0;}
-h6 a {border: solid 3px; padding: 5px 25px; color: $black!important; font-weight: bold;}
+h6 a {border: solid 3px; padding: 5px 25px; color: $black!important; font-weight: bold;text-decoration: none}
 
 p { font-size: 1.8em;padding:0 0 30px;line-height: 160%;  }
 p.meta {color: lighten($font-color,20);font-style: italic;}
@@ -60,7 +60,7 @@ ul ul , ul ol, ol ol {font-size: inherit}
 
 
 a {
-	text-decoration: none;
+	text-decoration: underline;
 	display: inline-block;
 	border-radius:3px;
 	@include transition(0.3s);
@@ -91,7 +91,7 @@ label {
 }
 input {
     padding: 10px;
-    border: 1px solid $light-grey;
+    border: 1px solid #555;
     font-size: 1.5em;
     margin:0 0 20px;
 
@@ -99,6 +99,18 @@ input {
 textarea{
     @extend input;
     height: 300px;
+}
+input[type="submit"] {
+    background: $primary-color;
+    color: white;
+    border: 0;
+    padding:20px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: darken($primary-color, 10);
+    }
 }
 
 strong, b {font-weight: bold;}
@@ -210,9 +222,21 @@ img {
 @import 'partners';
 @import 'news';
 @import 'events';
+@import 'partage';
+
 
 
 .section_page_title {
     text-align: center;
     padding-top:40px;
 }
+.section_equal_columns {
+    padding-top:50px;
+    padding-bottom:50px;
+}
+// .section_full_width {
+//     p, li {
+//         font-size: 2.4em
+//     }
+// }
+//

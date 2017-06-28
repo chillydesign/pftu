@@ -65,13 +65,32 @@
 			pager: false
 		});
 
+        var $read_more_partages = $('.read_more_partage');
+        var $long_descs = $('.long_desc');
+        var $short_descs = $('.short_desc');
+        $long_descs.hide();
+        $short_descs.show();
+        $read_more_partages.on('click', function(e){
+            e.preventDefault();
+            var $this = $(this);
+            $this.parent().hide();
+            var $long = $this.data('long');
+            $($long).show();
+
+            doMatchHeights();
+        })
 
 
 
 
-		$('.section_two_thirds_one_third').each(function(){
-			$(this).find('.thirdscol').matchHeight();
-		})
+        doMatchHeights();
+
+        function doMatchHeights() {
+            $('.section_two_thirds_one_third').each(function(){
+    			$(this).find('.thirdscol').matchHeight();
+    		})
+        }
+
 
 
 	});

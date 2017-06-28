@@ -1,0 +1,60 @@
+
+// #partage_form {
+//     max-width: 600px;
+//     margin:auto
+// }
+
+.partages_container {
+    margin:0 0 20px;
+    padding:0;
+    li  {
+        list-style: none;
+        margin:0 0 50px;
+        font-size: 1em;
+
+        h3 {
+            font-size: 2.6em;
+        }
+        p {
+            font-size: 1.6em;
+
+        }
+        .partage_icon {
+            display: inline-block;
+            margin:0px 0 5px;
+            padding: 10px 10px 10px 30px;
+            font-size: 1.5em;
+            text-decoration: none;
+
+            background-repeat: no-repeat;
+            background-position:  left 3px;
+            background-size: 30px;
+
+            &.icon_link {
+                background-image: url('../img/link.svg');
+            }
+            &.icon_download {
+                background-image: url('../img/download.svg');
+            }
+        }
+        .partage_image {
+            background: $light-grey;
+            width: 100%;
+            height: auto;
+            min-height:200px;
+            margin:0 0 10px;
+        }
+        img.partage_image {
+            min-height: auto;
+        }
+    }
+
+}
+
+.long_desc {
+
+}
+
+.short_desc {
+    display: none;
+}

@@ -58,6 +58,7 @@ function partage_fields(){
         'email' => 'Adresse email',
         'name_of_project' => 'Nom du projet',
         'description' => 'Description',
+        'place' => 'Lieu',
         'link' => 'Lien'
         //,
         //'featured_image' => 'Featured image'
@@ -80,18 +81,18 @@ function partage_form_shortcode($atts , $content = null) {
 
     // MESSAGE TO SAY THERE WAS A PROBLEM
     if (isset($_GET['problem'])) {
-        $rp_frm .= ' <p class="alert alert_error">Une erreur s’est produite en enregistrant ce Partage. Veuillez réessayer. </p>';
+        $rp_frm .= ' <p class="alert alert_error">Une erreur s’est produite en enregistrant votre suggestion. Veuillez réessayer.</p>';
     };
 
     // MESSAGE TO SAY PARTAGE SAVE WAS SUCCESFUL
     if (isset($_GET['success'])) {
-        $rp_frm .= ' <p class="alert alert_success">Your  partage was saved!! </p>';
+        $rp_frm .= ' <p class="alert alert_success">Votre suggestion a été enregistrée</p>';
     };
 
 
 
 
-    $rp_frm .= ' <form enctype="multipart/form-data" id="partage_form" action="' .  esc_url( admin_url('admin-post.php') ) . '" method="post">';
+    $rp_frm .= ' <form  enctype="multipart/form-data" id="partage_form" action="' .  esc_url( admin_url('admin-post.php') ) . '" method="post">';
 
 
     $rp_frm .= '<div class="row"><div class="col-sm-6">';
@@ -100,12 +101,21 @@ function partage_form_shortcode($atts , $content = null) {
     $rp_frm .=  make_partage_field('email', 'Email',  'input');
     $rp_frm .= '</div></div>';
 
-    $rp_frm .=  make_partage_field('name_of_project', 'Nom du Projet',  'input');
-    $rp_frm .=  make_partage_field('description', 'Description',  'textarea');
-    $rp_frm .=  make_partage_field('link', 'Lien',  'input');
+
 
     $rp_frm .= '<div class="row"><div class="col-sm-6">';
+    $rp_frm .=  make_partage_field('name_of_project', 'Nom du Projet',  'input');
+    $rp_frm .= '</div><div class="col-sm-6">';
+    $rp_frm .=  make_partage_field('place', 'Lieu',  'input');
+    $rp_frm .= '</div></div>';
+
+
+    $rp_frm .=  make_partage_field('description', 'Description',  'textarea');
+
         $rp_frm .=  make_partage_field('featured_image', 'Image (jpg,png,gif)',  'file' );
+
+    $rp_frm .= '<div class="row"><div class="col-sm-6">';
+    $rp_frm .=  make_partage_field('link', 'Lien',  'input');
     $rp_frm .= '</div><div class="col-sm-6">';
         $rp_frm .=  make_partage_field('file', 'Fichier',  'file' );
     $rp_frm .= '</div></div>';
@@ -197,22 +207,22 @@ function get_email_from_partage_form () {
 
 
 
-                wp_redirect(site_url('/partages?success' ), $status = 302);
+                wp_redirect(site_url('/ajouter-un-partage?success' ), $status = 302);
                 //wp_redirect(  get_permalink( $new_partage )  );
 
                 // something went wrong with adding the partage post
             } else {
-                wp_redirect(site_url('/partages?problem'), $status = 302);
+                wp_redirect(site_url('/ajouter-un-partage?problem'), $status = 302);
             }
 
             // if we dont have all the data or user not logged in
         } else {
-            wp_redirect(site_url('/partages?problem'), $status = 302);
+            wp_redirect(site_url('/ajouter-un-partage?problem'), $status = 302);
         }
 
         // if the form didnt post the action field
     } else {
-        wp_redirect(site_url('/partages?problem'), $status = 302);
+        wp_redirect(site_url('/ajouter-un-partage?problem'), $status = 302);
     }
 
 

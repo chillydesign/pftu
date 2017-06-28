@@ -816,10 +816,14 @@ function latest_partage_shortcode( $atts, $content = null ) {
     foreach ( $partages as $post ) :
         setup_postdata( $post );
         $partage_img = thumbnail_of_post_url($post->ID, 'small');
-        $ret .= '<p><a href="'. get_the_permalink() .'"><img src="'. $partage_img .'" alt="" />'. get_the_title() .'</a></p>';
+        $place = get_field('place', $post->ID );
+        $ret .= '<p><a href="'. get_the_permalink() .'">'. get_the_title() ;
+        if ($place && $place != '') $ret .=  ', ' . $place . '' ;
+        if ($partage_img != '')  $ret .= '<img src="'. $partage_img .'" alt="" />';
+        $ret .= '</a></p>';
 
 
-    endforeach;
+		endforeach; wp_reset_postdata();
 
 
     $ret .= '';
@@ -833,6 +837,72 @@ add_shortcode( 'latest_partage', 'latest_partage_shortcode' );
 
 
 
+function all_partages_shortcode( $atts, $content = null ) {
+    global $post;
+
+    $a = shortcode_atts( array(
+    ), $atts );
+
+
+
+    $partages = get_posts( array('post_type' => 'partage', 'posts_per_page'=> -1 ));
+
+    $ret = '<ul class="partages_container">';
+    foreach ( $partages as $post ) :
+        setup_postdata( $post );
+        $partage_img = thumbnail_of_post_url($post->ID, 'medium');
+        $place = get_field('place', $post->ID );
+        $link = get_field('link', $post->ID );
+        $description = get_field('description', $post->ID );
+        $file = get_field('file', $post->ID );
+
+
+        $ret .= '<li>';
+        $ret .= '<div class="row">';
+        $ret .= '<div class="col-sm-4">';
+         if ($partage_img != '')  $ret .= '<img  class="partage_image" src="'. $partage_img .'" alt="" />';
+         if ($partage_img == '')  $ret .= '<div  class="partage_image"></div>';
+        $ret .= '</div>';
+
+        $ret .= '<div class="col-sm-8">';
+        $ret .=  '<h3>'.  get_the_title();
+            if ($place && $place != '') $ret .=  ', ' . $place . ' ' ;
+        $ret  .= '</h3>' ;
+
+
+
+        if ($description && $description != ''){
+            $partage_id = 'partage_' . $post->ID;
+            $desc_array =  explode(' ', $description);
+            $short_desc =    implode(  array_slice($desc_array,0, 30)  , ' ');
+
+            if (sizeof( $desc_array ) > 30 ) {
+                $ret .=  '<p class="short_desc">' . $short_desc . ' <a data-long="#'. $partage_id. '" class="read_more_partage" href="#">Lire plus</a> </p> ' ;
+                $ret .=  '<p id="'. $partage_id. '" class="long_desc">' . $description . ' </p> ' ;
+            } else {
+                $ret .= '<p >' . $description . ' </p> ' ;
+            }
+
+        }
+        if ($link && $link != '') $ret .=  ' <a  class="icon_link partage_icon" target="_blank" href="'. $link .'">' . $link . ' </a> ' ;
+        if ($file && $file['url'] != '') $ret .=  '<a class="icon_download partage_icon"  target="_blank"  href="' . $file['url'] . '"> Telecharger </a> ' ;
+        $ret .= '</div>';
+
+
+        $ret .= '</div>';
+        $ret .= '</li>';
+
+
+		endforeach; wp_reset_postdata();
+
+
+    $ret .= '</ul>';
+
+
+    return  $ret;
+
+}
+add_shortcode( 'partages', 'all_partages_shortcode' );
 
 
 
