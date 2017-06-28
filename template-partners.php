@@ -12,6 +12,10 @@
 
 		<!-- article -->
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+            <?php include('section-loop.php'); ?>
+
+
 				<div class="container">
 				<ul class="partners_container">
 
@@ -48,7 +52,6 @@
 				</div>
 
 
-			<?php include('section-loop.php'); ?>
 
 
 			<div class="container">

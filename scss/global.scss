@@ -24,11 +24,14 @@ body {
 
 h1, h2, h3, h4, h5, h6 {line-height: 160%;}
 
-h1 {font-size: 2em; padding:25px 0;font-weight: bold;}
-h2 {font-size: 2.9em; padding: 0 0 20px;font-weight: bold; text-transform:uppercase; position: relative;}
-h2:before {content: ''; display: block;border-top: solid 3px white; position: relative; top: 22px;}
+
+h1, h2 {font-size: 2.9em; padding: 0 0 20px;font-weight: bold; text-transform:uppercase; position: relative;}
+h1:before , h2:before {content: ''; display: block;border-top: solid 3px white; position: relative; top: 22px;}
+.home h1 {font-size: 2em; padding:25px 0;font-weight: bold;text-transform: none;}
+.home h1:before {border:0;}
+
 h3 {font-size: 2.21em; padding: 12px 0 20px; font-weight:bold;}
-h4 {font-size: 1.69em;padding:0 0 10px;font-weight: normal;}
+h4 {font-size: 1.69em;padding:0 0 10px;font-weight: normal;color: $primary-color}
 h6 {font-size: 1.8em; display: inline-block; margin: 0 20px 20px 0;}
 h6 a {border: solid 3px; padding: 5px 25px; color: $black!important; font-weight: bold;}
 
@@ -42,9 +45,11 @@ ul ul , ul ol, ol ol {font-size: inherit}
 
 
 @media (min-width: 768px){
-	h1 {font-size: 2.5em;}
-	h2 {font-size: 4.5em;}
-	h2:before {content: ''; display: block;border-top: solid 3px white; position: relative; top: 33px;}
+
+	h1, h2 {font-size: 4.5em;}
+    .home h1 {font-size: 2.5em;}
+	h1:before, h2:before {content: ''; display: block;border-top: solid 3px white; position: relative; top: 33px;}
+    .home h1:before {border:0;}
 	h4 {font-size: 2.1em;}
 
 }
@@ -74,7 +79,27 @@ a {
 }
 
 
+// FORMS
+form { }
+label {
+    font-size: 1.5em;
+    padding: 5px 0 10px;
+    display: block;
+    color: lighten($font-color, 20);
+    text-transform: uppercase;
 
+}
+input {
+    padding: 10px;
+    border: 1px solid $light-grey;
+    font-size: 1.5em;
+    margin:0 0 20px;
+
+}
+textarea{
+    @extend input;
+    height: 300px;
+}
 
 strong, b {font-weight: bold;}
 em, i {font-style: italic}
@@ -105,6 +130,27 @@ img {
 	margin: 0;
 }
 
+.alert {
+    padding:15px;
+    margin:10px 0 20px;
+    border:1px solid #888;
+    border-radius: 5px;
+
+    &.alert_error {
+        background: $red;
+        border-color: darken($red, 20 );
+        color: darken($red, 40 );
+    }
+
+    &.alert_success {
+        background: $green;
+        border-color: darken($green, 20 );
+        color: darken($green, 40 );
+
+    }
+}
+
+
 .title_image {
 	background-size: cover;
 	background-position: center bottom;
@@ -120,6 +166,9 @@ img {
     margin: auto;
     text-align: center;
     padding: 60px 35px;
+    h4 {
+        color: white;
+    }
 }
 
 .border {
@@ -161,3 +210,9 @@ img {
 @import 'partners';
 @import 'news';
 @import 'events';
+
+
+.section_page_title {
+    text-align: center;
+    padding-top:40px;
+}

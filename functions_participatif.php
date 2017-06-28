@@ -80,12 +80,12 @@ function partage_form_shortcode($atts , $content = null) {
 
     // MESSAGE TO SAY THERE WAS A PROBLEM
     if (isset($_GET['problem'])) {
-        $rp_frm .= ' <p>Une erreur s’est produite en enregistrant ce Partage. Veuillez réessayer. </p>';
+        $rp_frm .= ' <p class="alert alert_error">Une erreur s’est produite en enregistrant ce Partage. Veuillez réessayer. </p>';
     };
 
     // MESSAGE TO SAY PARTAGE SAVE WAS SUCCESFUL
     if (isset($_GET['success'])) {
-        $rp_frm .= ' <p>Your  partage was saved!! </p>';
+        $rp_frm .= ' <p class="alert alert_success">Your  partage was saved!! </p>';
     };
 
 
@@ -94,14 +94,23 @@ function partage_form_shortcode($atts , $content = null) {
     $rp_frm .= ' <form enctype="multipart/form-data" id="partage_form" action="' .  esc_url( admin_url('admin-post.php') ) . '" method="post">';
 
 
-
+    $rp_frm .= '<div class="row"><div class="col-sm-6">';
     $rp_frm .=  make_partage_field('name', 'Nom',  'input');
+    $rp_frm .= '</div><div class="col-sm-6">';
     $rp_frm .=  make_partage_field('email', 'Email',  'input');
+    $rp_frm .= '</div></div>';
 
     $rp_frm .=  make_partage_field('name_of_project', 'Nom du Projet',  'input');
     $rp_frm .=  make_partage_field('description', 'Description',  'textarea');
     $rp_frm .=  make_partage_field('link', 'Lien',  'input');
-    $rp_frm .=  make_partage_field('featured_image', 'Featured Image',  'file' );
+
+    $rp_frm .= '<div class="row"><div class="col-sm-6">';
+        $rp_frm .=  make_partage_field('featured_image', 'Image (jpg,png,gif)',  'file' );
+    $rp_frm .= '</div><div class="col-sm-6">';
+        $rp_frm .=  make_partage_field('file', 'Fichier',  'file' );
+    $rp_frm .= '</div></div>';
+
+
 
 
 
@@ -111,8 +120,6 @@ function partage_form_shortcode($atts , $content = null) {
     $rp_frm .= '
     <input type="submit" id="submit_course_form" value="Envoyer">
     <input type="hidden" name="action" value="partage_form">';
-
-
 
     $rp_frm .= '</form>';
 
@@ -146,11 +153,10 @@ function get_email_from_partage_form () {
         if ( !empty($email)  && !empty($name_of_project)   ) {
             $post = array(
                 'post_title'   => $name_of_project,
-                'post_status'  => 'publish',
+                'post_status'  => 'draft',
                 'post_type'    => 'partage',
                 'post_content' => ''
-                //,
-            //    'post_author'  =>  $current_user_id
+                //, 'post_author'  =>  $current_user_id
 
             );
 
@@ -176,9 +182,20 @@ function get_email_from_partage_form () {
                 // add or replace the file already there
                 $featured_image = $_FILES['featured_image'];
                 if ($featured_image['size'] > 0 ) {
-                  $file_id = partage_add_file_upload( $featured_image, $new_partage );
-                  update_field( 'featured_image', $file_id,  $new_partage  );
+                  $picture_id = partage_add_file_upload( $featured_image, $new_partage );
+                  $thumbnail = set_post_thumbnail( $new_partage, $picture_id );
                 }
+
+
+
+                $uploaded_file = $_FILES['file'];
+                if ($uploaded_file['size'] > 0 ) {
+                  $file_id = partage_add_file_upload( $uploaded_file, $new_partage );
+                  update_field( 'file', $file_id,  $new_partage  );
+                }
+
+
+
 
                 wp_redirect(site_url('/partages?success' ), $status = 302);
                 //wp_redirect(  get_permalink( $new_partage )  );
@@ -216,6 +233,8 @@ function partage_add_file_upload($artist_file, $parent){
     );
 
     $attach_id = wp_insert_attachment( $attachment, $upload['file'], $parent );
+
+
     return $attach_id;
 
 }
