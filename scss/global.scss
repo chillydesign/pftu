@@ -60,6 +60,10 @@ a {
 	border-radius:3px;
 	@include transition(0.3s);
 
+    &.active {
+    font-weight: bold;
+    }
+
 
 	&:link, &:visited, &:active {
 		color: $primary-color

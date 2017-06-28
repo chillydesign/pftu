@@ -464,11 +464,45 @@ function webfactorcomments($comment, $args, $depth)
     ));
   }
 
-  add_action('init', 'create_post_type_évènement'); // Add our évènement Type
-  function create_post_type_évènement()
+
+
+  function register_event_cat_tax(){
+
+            $labels = array(
+        		'name'              => _x( 'Evenement Categories', 'taxonomy general name', 'webfactor' ),
+        		'singular_name'     => _x( 'Evenement Categorie', 'taxonomy singular name', 'webfactor' ),
+        		'search_items'      => __( 'Search Evenement Categories', 'webfactor' ),
+        		'all_items'         => __( 'All Evenement Categories', 'webfactor' ),
+        		'parent_item'       => __( 'Parent Evenement Categorie', 'webfactor' ),
+        		'parent_item_colon' => __( 'Parent Evenement Categorie:', 'webfactor' ),
+        		'edit_item'         => __( 'Edit Evenement Categorie', 'webfactor' ),
+        		'update_item'       => __( 'Update Evenement Categorie', 'webfactor' ),
+        		'add_new_item'      => __( 'Add New Evenement Categorie', 'webfactor' ),
+        		'new_item_name'     => __( 'New Evenement Categorie Name', 'webfactor' ),
+        		'menu_name'         => __( 'Evenement Categorie', 'webfactor' ),
+        	);
+
+        	$args = array(
+        		'hierarchical'      => true,
+        		'labels'            => $labels,
+        		'show_ui'           => true,
+        		'show_admin_column' => true,
+        		'query_var'         => true,
+        		'rewrite'           => array( 'slug' => 'event_category' ),
+        	);
+           register_taxonomy( 'event_category', array( 'evenement' ) , $args);
+
+  }
+
+
+
+  add_action('init', 'register_event_cat_tax'); // Add our évènement Type
+  add_action('init', 'create_post_type_evenement'); // Add our évènement Type
+  function create_post_type_evenement()
   {
-    register_taxonomy_for_object_type('category', 'html5-blank'); // Register Taxonomies for Category
-    register_taxonomy_for_object_type('post_tag', 'html5-blank');
+
+    //register_taxonomy_for_object_type('event_category', 'html5-blank'); // Register Taxonomies for Category
+    //register_taxonomy_for_object_type('post_tag', 'html5-blank');
     register_post_type('evenement', // Register Custom Post Type
     array(
       'labels' => array(
@@ -496,8 +530,9 @@ function webfactorcomments($comment, $args, $depth)
       ), // Go to Dashboard Custom HTML5 Blank post for supports
       'can_export' => true, // Allows export in Tools > Export
       'taxonomies' => array(
-        'post_tag',
-        'category'
+        //'post_tag',
+        //'category',
+        'event_category'
       ) // Add Category and Post Tags support
     ));
   }
@@ -636,50 +671,71 @@ function webfactorcomments($comment, $args, $depth)
     global $post;
 
     $a = shortcode_atts( array(
-      'limit' => -1
+      'limit' => -1,
+      'future' => false
     ), $atts );
 
-    $today = 	 new DateTime('today');
-    $today_string = $today->format('Y-m-d');
 
+
+    $title = 'Évènements';
 
 
     $args =   array(
         'posts_per_page'   =>  $a['limit'] ,
         'post_type'        => 'evenement',
-        'suppress_filters' => 0,
         'orderby' => 'start_date',
-        'order'=> 'ASC',
-        'meta_query'=>	array(
-          'relation' => 'OR',
-          array(
-            'key'     => 'start_date',
-            'value'   =>  $today_string,
-            'compare' => '>=',
-            'type'    =>  'date'
-          ),
-          array(
-            'key'     => 'end_date',
-            'value'   =>  $today_string,
-            'compare' => '>=',
-            'type'    =>  'date'
-          )
-        )
+        'order'=> 'ASC'
       );
 
 
       // if watning to find only events in a specific category
       // put ?event_cat param in URL
       if (isset($_GET['event_cat']) && $_GET['event_cat'] !='' ) {
-          $args['cat'] = $_GET['event_cat'];
+          $args['tax_query'] = array(
+      		array(
+      			'taxonomy' => 'event_category',
+      			'field'    => 'term_id',
+      			'terms'    =>  $_GET['event_cat']
+      		),
+      	);
+
+
+        $term =  get_term($_GET['event_cat']);
+        if ($term && isset($term->name)) {
+            $title = $term->name;
+        }
       }
 
-      $events = new WP_Query( $args);
+      // if want to show future events you can put future="true" in the shortcode
+      // or add a get param of event_future
+      if (isset($_GET['event_future']) ||  $a['future'] == 'true'   ) {
+          $today = 	 new DateTime('today');
+          $today_string = $today->format('Y-m-d');
+          $args['meta_query'] =	array(
+            'relation' => 'OR',
+            array(
+              'key'     => 'start_date',
+              'value'   =>  $today_string,
+              'compare' => '>=',
+              'type'    =>  'date'
+            ),
+            array(
+              'key'     => 'end_date',
+              'value'   =>  $today_string,
+              'compare' => '>=',
+              'type'    =>  'date'
+            )
+        );
+
+      }
+
+
+    $events = new WP_Query( $args);
 
 
 
     $events_text = '<div class="latest_events_container">';
-    $events_text .= '<h3>Évènements</h3><ul>';
+    $events_text .= '<h3>'. $title .'</h3><ul>';
 
 
       while ( $events->have_posts() ) : $events->the_post();
@@ -700,9 +756,47 @@ function webfactorcomments($comment, $args, $depth)
     return  $events_text;
 
   }
-  add_shortcode( 'latestevents', 'latest_events_shortcode' );
+  add_shortcode( 'latest_events', 'latest_events_shortcode' );
 
 
+
+
+
+
+
+
+    function event_cats_shortcode( $atts, $content = null ) {
+      global $post;
+
+      $a = shortcode_atts( array(
+      ), $atts );
+
+
+      $event_categories =  get_terms('event_category', array(
+            'hide_empty' => true
+      )  );
+
+      $ret = '<ul>';
+      $active = '';
+
+      foreach ($event_categories as $category) {
+        $active = ( isset($_GET['event_cat']) &&  $category->term_id == $_GET['event_cat'] ) ? 'active' : '';
+        $ret .= '<li><a class="'. $active .'" href="?event_cat='.  $category->term_id .'">'.  $category->name .'</a></li>';
+      }
+
+      $future_active = (isset($_GET['event_future'])  ) ? 'active' : '';
+      $ret .= '<li><a  class="'. $future_active .'"href="?event_future">Future events</a></li>';
+      $ret .= '</ul>';
+
+
+
+    $all_active = (!isset($_GET['event_cat']) & !isset($_GET['event_future'])  ) ? 'active' : '';
+    $ret .= '<h6><a class="'. $all_active .'" href="?">All categories</a></h6>';
+
+      return  $ret;
+
+    }
+    add_shortcode( 'event_categories', 'event_cats_shortcode' );
 
 
   ?>
