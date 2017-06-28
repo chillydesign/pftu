@@ -799,4 +799,8 @@ function webfactorcomments($comment, $args, $depth)
     add_shortcode( 'event_categories', 'event_cats_shortcode' );
 
 
+
+include('functions_participatif.php');
+
+
   ?>
