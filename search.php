@@ -3,8 +3,12 @@
 
 		<!-- section -->
 		<section class="min_height_browser container">
-
-			<h1><?php echo sprintf( __( '%s Search Results for ', 'webfactor' ), $wp_query->found_posts ); echo get_search_query(); ?></h1>
+            <br />
+            <br />
+			<h1>Recherche </h1>
+            <p>
+                <?php echo sprintf( __( '%s Search Results for ', 'webfactor' ), $wp_query->found_posts ); echo '"' . get_search_query() . '"'; ?>
+            </p>
 
 			<?php get_template_part('loop'); ?>
 

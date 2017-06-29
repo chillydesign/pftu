@@ -23,4 +23,4 @@
 
 </div>
 
-<h6 style="width: 204px; margin: -20px auto 50px; display: block;"><a href="#">En savoir plus >></a></h6>
+<h6 style="width: 204px; margin: -20px auto 50px; display: block;"><a href="<?php echo home_url(); ?>/partenaires">En savoir plus >></a></h6>

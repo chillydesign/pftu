@@ -32,7 +32,8 @@ function create_post_type_partage()
         //    'editor',
         //    'excerpt',
             'author',
-            'thumbnail'
+            'thumbnail',
+            'comments'
         ), // Go to Dashboard Custom webfactor Blank post for supports
         'can_export' => true, // Allows export in Tools > Export
         'taxonomies' => array(

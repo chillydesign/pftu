@@ -10,7 +10,7 @@
 		</h3>
 
 
-		<p class="meta"><?php the_time('F j, Y'); ?></p>
+		<!-- <p class="meta"><?php the_time('F j, Y'); ?></p> -->
 
 		<?php html5wp_excerpt('html5wp_index'); // Build your custom callback length in functions.php ?>
 
@@ -21,12 +21,6 @@
 
 
 
-			<!-- post thumbnail -->
-			<?php if ( has_post_thumbnail()) : // Check if Thumbnail exists ?>
-				<?php $thumbnail_img = thumbnail_of_post_url( get_the_ID(), 'square'); ?>
-				<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="news_image" style="background-image:url(<?php echo $thumbnail_img; ?>);"></a>
-			<?php endif; ?>
-			<!-- /post thumbnail -->
 
 			</div>
 
@@ -35,9 +29,9 @@
 <?php else: ?>
 
 	<!-- article -->
-	<article>
-		<h2><?php _e( 'Sorry, nothing to display.', 'webfactor' ); ?></h2>
-	</article>
+	<!-- 	<article>
+	<h2><?php _e( 'Sorry, nothing to display.', 'webfactor' ); ?></h2>
+	</article> -->
 	<!-- /article -->
 
 <?php endif; ?>

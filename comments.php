@@ -7,7 +7,7 @@
 
 <?php if (have_comments()) : ?>
 
-	<h2><?php comments_number(); ?></h2>
+	<h3><?php comments_number(); ?></h3>
 
 	<ul>
 		<?php wp_list_comments('type=comment&callback=webfactorcomments'); // Custom callback in functions.php ?>
@@ -19,6 +19,6 @@
 
 <?php endif; ?>
 
-<?php comment_form(); ?>
+<?php comment_form(array('title_reply_before' => '<h3>', 'title_reply_after' => '</h3>' )); ?>
 
 </div>

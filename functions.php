@@ -282,7 +282,7 @@ function html5wp_excerpt($length_callback = '', $more_callback = '')
 function html5_blank_view_article($more)
 {
     global $post;
-    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'webfactor') . '</a>';
+    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('Lire plus', 'webfactor') . '</a>';
 }
 
 // Remove Admin bar
@@ -341,26 +341,24 @@ function webfactorcomments($comment, $args, $depth)
     <?php if ( 'div' != $args['style'] ) : ?>
         <div id="div-comment-<?php comment_ID() ?>" class="comment-body">
         <?php endif; ?>
+
+        <blockquote>
+            <?php comment_text() ?>
+            <?php if ($comment->comment_approved == '0') : ?>
+            	<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
+            	<br />
+            <?php endif; ?>
+        </blockquote>
+
         <div class="comment-author vcard">
-            <?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['180'] ); ?>
-            <?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link()) ?>
-        </div>
-        <?php if ($comment->comment_approved == '0') : ?>
-            <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
-            <br />
-        <?php endif; ?>
-
-        <div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-            <?php
-            printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
-            ?>
+            <?php // if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['180'] ); ?>
+            <?php printf(__('<cite class="fn">%s</cite> '), get_comment_author_link()) ?>
+            <span class="date"><?php echo get_comment_date('d M Y'); ?></span>
         </div>
 
-        <?php comment_text() ?>
 
-        <div class="reply">
-            <?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-        </div>
+
+
         <?php if ( 'div' != $args['style'] ) : ?>
         </div>
     <?php endif; ?>
@@ -859,15 +857,16 @@ function all_partages_shortcode( $atts, $content = null ) {
 
         $ret .= '<li>';
         $ret .= '<div class="row">';
-        $ret .= '<div class="col-sm-4">';
+        $ret .= '<div class="col-sm-4 partage_img">';
+        $ret .= '<a href="'.get_the_permalink() .'">';
          if ($partage_img != '')  $ret .= '<img  class="partage_image" src="'. $partage_img .'" alt="" />';
          if ($partage_img == '')  $ret .= '<div  class="partage_image"></div>';
-        $ret .= '</div>';
+        $ret .= '</a></div>';
 
         $ret .= '<div class="col-sm-8">';
-        $ret .=  '<h3>'.  get_the_title();
+        $ret .=  '<h3><a href="'.get_the_permalink() .'">'.  get_the_title();
             if ($place && $place != '') $ret .=  ', ' . $place . ' ' ;
-        $ret  .= '</h3>' ;
+        $ret  .= '</a></h3>' ;
 
 
 
@@ -884,7 +883,7 @@ function all_partages_shortcode( $atts, $content = null ) {
             }
 
         }
-        if ($link && $link != '') $ret .=  ' <a  class="icon_link partage_icon" target="_blank" href="'. $link .'">' . $link . ' </a> ' ;
+        if ($link && $link != '') $ret .=  ' <a  class="icon_link partage_icon" target="_blank" href="'. add_scheme_to_url($link) .'">' . $link . ' </a> ' ;
         if ($file && $file['url'] != '') $ret .=  '<a class="icon_download partage_icon"  target="_blank"  href="' . $file['url'] . '"> Telecharger </a> ' ;
         $ret .= '</div>';
 
@@ -905,6 +904,88 @@ function all_partages_shortcode( $atts, $content = null ) {
 add_shortcode( 'partages', 'all_partages_shortcode' );
 
 
+function wf_disable_comment_url($fields) {
+    unset($fields['url']);
+    return $fields;
+}
+add_filter('comment_form_default_fields','wf_disable_comment_url');
+
+
+function add_scheme_to_url($url, $scheme = 'http://'){
+  return parse_url($url, PHP_URL_SCHEME) === null ?  $scheme . $url : $url;
+}
+
+
+
+
+
+function list_searcheable_acf(){
+  $list_searcheable_acf = array(  'sections_0_page_title_content', 'sections_1_page_title_content', 'sections_2_page_title_content', 'sections_0_full_width_content', 'sections_1_full_width_content', 'sections_2_full_width_content', 'sections_0_bg_small', 'sections_1_bg_small', 'sections_2_bg_small', 'sections_0_bg_big', 'sections_1_bg_big', 'sections_2_bg_big');
+  return $list_searcheable_acf;
+}
+
+function advanced_custom_search( $where, &$wp_query ) {
+    global $wpdb;
+
+    if ( empty( $where ))
+        return $where;
+
+    // get search expression
+    $terms = $wp_query->query_vars[ 's' ];
+
+    // explode search expression to get search terms
+    $exploded = explode( ' ', $terms );
+    if( $exploded === FALSE || count( $exploded ) == 0 )
+        $exploded = array( 0 => $terms );
+
+    // reset search in order to rebuilt it as we whish
+    $where = '';
+
+    // get searcheable_acf, a list of advanced custom fields you want to search content in
+    $list_searcheable_acf = list_searcheable_acf();
+    foreach( $exploded as $tag ) :
+        $where .= "
+          AND (
+            (wp_posts.post_title LIKE '%$tag%')
+            OR (wp_posts.post_content LIKE '%$tag%')
+            OR EXISTS (
+              SELECT * FROM wp_postmeta
+	              WHERE post_id = wp_posts.ID
+	                AND (";
+        foreach ($list_searcheable_acf as $searcheable_acf) :
+          if ($searcheable_acf == $list_searcheable_acf[0]):
+            $where .= " (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+          else :
+            $where .= " OR (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+          endif;
+        endforeach;
+	        $where .= ")
+            )
+            OR EXISTS (
+              SELECT * FROM wp_comments
+              WHERE comment_post_ID = wp_posts.ID
+                AND comment_content LIKE '%$tag%'
+            )
+            OR EXISTS (
+              SELECT * FROM wp_terms
+              INNER JOIN wp_term_taxonomy
+                ON wp_term_taxonomy.term_id = wp_terms.term_id
+              INNER JOIN wp_term_relationships
+                ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+              WHERE (
+          		taxonomy = 'post_tag'
+            		OR taxonomy = 'category'
+            		OR taxonomy = 'myCustomTax'
+          		)
+              	AND object_id = wp_posts.ID
+              	AND wp_terms.name LIKE '%$tag%'
+            )
+        )";
+    endforeach;
+    return $where;
+}
+
+add_filter( 'posts_search', 'advanced_custom_search', 500, 2 );
 
 
 
