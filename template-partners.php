@@ -84,5 +84,9 @@
 
 
 
+	<section class="section  section_border">
+			<div class="border blackborder"></div>
+	</section>
+
 
 <?php get_footer(); ?>
