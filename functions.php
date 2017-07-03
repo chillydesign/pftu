@@ -920,7 +920,10 @@ function add_scheme_to_url($url, $scheme = 'http://'){
 
 
 function list_searcheable_acf(){
-  $list_searcheable_acf = array(  'sections_0_page_title_content', 'sections_1_page_title_content', 'sections_2_page_title_content', 'sections_0_full_width_content', 'sections_1_full_width_content', 'sections_2_full_width_content', 'sections_0_bg_small', 'sections_1_bg_small', 'sections_2_bg_small', 'sections_0_bg_big', 'sections_1_bg_big', 'sections_2_bg_big');
+  $list_searcheable_acf = array(  'sections_0_page_title_content', 'sections_1_page_title_content', 'sections_2_page_title_content', 'sections_0_full_width_content', 'sections_1_full_width_content', 'sections_2_full_width_content', 'sections_0_bg_small', 'sections_1_bg_small', 'sections_2_bg_small', 'sections_0_bg_big', 'sections_1_bg_big', 'sections_2_bg_big', 'sections_3_page_title_content', 'sections_3_full_width_content', 'sections_3_bg_small', 'sections_3_bg_big', 'sections_4_page_title_content', 'sections_4_full_width_content', 'sections_4_bg_small', 'sections_4_bg_big', 'description', 'name_of_project' );
+
+
+
   return $list_searcheable_acf;
 }
 

@@ -26,7 +26,7 @@ function create_post_type_partage()
         'public' => true,
         'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
         'has_archive' => true,
-        'exclude_from_search' => true, // remove from search engine
+        'exclude_from_search' => false, // remove from search engine
         'supports' => array(
             'title',
         //    'editor',

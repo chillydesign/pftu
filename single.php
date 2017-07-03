@@ -16,7 +16,7 @@
 			<!-- post thumbnail -->
 			<?php if ( has_post_thumbnail()) : // Check if Thumbnail exists ?>
 				<?php $thumbnail_img = thumbnail_of_post_url( get_the_ID(), 'full'); ?>
-				<div class="news_image_large" style="background-image:url(<?php echo $thumbnail_img; ?>);"></div>
+				<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="news_image_large" style="background-image:url(<?php echo $thumbnail_img; ?>);"></a>
 			<?php endif; ?>
 			<!-- /post thumbnail -->
 
