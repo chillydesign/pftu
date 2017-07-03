@@ -146,6 +146,11 @@ header {
 			padding: 0;
 			margin:0;
 
+            li {
+                font-size: 0.8em;
+                text-indent: 20px;
+            }
+
 			a{
 				text-transform: uppercase;
 				display:block;
@@ -179,7 +184,32 @@ header {
 			display: flex;
 			li {
 				display: inline-block;
-								text-align: center;
+				text-align: center;
+                position: relative;
+
+                ul.sub-menu {
+                    position: absolute;
+                    display: none;
+                    width:100%;
+                    background-color: #313131;
+
+                    li {
+                        display: block;
+                        text-indent: 0;
+
+                        a {
+                            display: block;
+                        }
+                    }
+                }
+
+        &:hover {
+            ul.sub-menu {
+                display: block;
+                z-index: 1000;
+            }
+        }
+
 			}
 		}
 		#mobile_nav_button {
