@@ -142,6 +142,16 @@ img {
 	margin: 0;
 }
 
+
+ .wp-caption {border:0; background:none; }
+ p.wp-caption-text {
+    position: relative;
+    top: -22px;
+    background: rgba(0,0,0,0.5);
+    padding: 2px!important;
+}
+
+
 .alert {
     padding:15px;
     margin:10px 0 20px;
@@ -243,7 +253,7 @@ img {
 
 // COMMENTS
 .comments {
-    
+
 
     ul {
         margin:0 0 20px;
