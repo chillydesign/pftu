@@ -95,4 +95,48 @@
 
 	});
 
-})(jQuery, this);
+})(jQuery, this); //Everything after this loads before the page
+
+var map_theme = [{"featureType":"all","elementType":"all","stylers":[{"hue":"#ff0000"},{"saturation":-100},{"lightness":-30}]},{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#353535"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#656565"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#505050"}]},{"featureType":"poi","elementType":"geometry.stroke","stylers":[{"color":"#808080"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#454545"}]}];
+
+var myMapOptions = {
+			zoom: 13,
+			mapTypeControl: true,
+			scrollwheel: false,
+			navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			styles : map_theme
+		};
+
+
+	function get_map($location, $element){
+
+		var mapcontainer =  $element;
+				mapcontainer.css({
+						width : '100%',
+						height : 370
+				})
+
+
+				geocoder = new google.maps.Geocoder();
+				var address = $location;
+
+				var map = new google.maps.Map(mapcontainer.get(0), myMapOptions);
+
+
+
+				geocoder.geocode( { 'address': address}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					console.log(results);
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+							map: map,
+							position: results[0].geometry.location,
+							title: 'PFTU'
+					});
+				} else {
+					alert('Geocode was not successful for the following reason: ' + status);
+				}
+				});
+
+	}

@@ -29,6 +29,28 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="<?php bloginfo('description'); ?>">
 
+		<?php $smp = social_meta_properties(); ?>
+<!-- Open Graph -->
+<meta property="og:url" content="<?php echo $smp->url; ?>">
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Go Out! Magazine"/>
+<meta property="og:title" content="<?php echo $smp->title; ?>">
+<meta property="og:description" content="<?php echo $smp->description; ?>">
+<meta property="og:img" content="<?php echo $smp->image; ?>">
+<meta property="og:image" content="<?php echo $smp->image; ?>">
+<meta property="fb:admins" content="333554090408777" />
+
+<!-- TWITTER -->
+<meta name="twitter:card" value="<?php echo $smp->description; ?>">
+<meta name="twitter:title" content="<?php echo $smp->title; ?>">
+<meta name="twitter:description" content="<?php echo $smp->description; ?>">
+<meta name="twitter:image" content="<?php echo $smp->image; ?>">
+<!-- GOOGLE -->
+<meta itemprop="name" content="<?php echo $smp->title; ?>">
+<meta itemprop="description" content="<?php echo $smp->description; ?>">
+<meta itemprop="image" content="<?php echo $smp->image; ?>">
+
+
 		<?php wp_head(); ?>
 
 

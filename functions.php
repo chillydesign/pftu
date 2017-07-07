@@ -112,7 +112,7 @@ function webfactor_footer_nav()
 }
 
 function wf_version(){
-    return '0.0.1';
+    return '0.0.2';
 }
 
 // Load HTML5 Blank scripts (header.php)
@@ -128,6 +128,9 @@ function webfactor_header_scripts()
 
         wp_register_script('wf_matchheight', get_template_directory_uri() . '/js/min/jquery.matchHeight.js', array('jquery'), wf_version(), true); // Custom scripts
         wp_enqueue_script('wf_matchheight'); // Enqueue it!
+
+        wp_register_script('wf_google_maps', '//maps.google.com/maps/api/js?key=AIzaSyC-BDJZU14ltCrYRPei33a4ZSQfJqRbxNY', array('jquery'), '', true); // Custom scripts
+       wp_enqueue_script('wf_google_maps'); // Enqueue it!
 
         wp_register_script('wf_scripts', get_template_directory_uri() . '/js/min/scripts.js', array('jquery'), wf_version(), true); // Custom scripts
         wp_enqueue_script('wf_scripts'); // Enqueue it!
@@ -582,15 +585,16 @@ function webfactorcomments($comment, $args, $depth)
     function chilly_map( $atts, $content = null ) {
 
         $attributes = shortcode_atts( array(
-            'title' => "Rue du Midi 15 Case postale 411 1020 Renens"
+            'location' => "Chemin de Pra 1993, Veysonnaz, Suisse"
         ), $atts );
+        $id = 'mapcontainer' .  rand(10000000, 99999999);
 
+        $chilly_map = '<div id="' . $id .  '"></div>';
 
+        $chilly_map .= "<script>    jQuery(function () { get_map(' " . $attributes['location'] .  " ' ,  jQuery('#" . $id . "')   ) });  </script>";
 
-        $title = $attributes['title'];
-        $chilly_map = '<div id="map_container_1"></div>';
-        $chilly_map .= "<script> var latt = 46.5380683; var lonn=6.5812023; var map_title = '" . $title . "'  </script>";
         return $chilly_map;
+
 
     }
     add_shortcode( 'chilly_map', 'chilly_map' );
@@ -815,9 +819,9 @@ function latest_partage_shortcode( $atts, $content = null ) {
         setup_postdata( $post );
         $partage_img = thumbnail_of_post_url($post->ID, 'small');
         $place = get_field('place', $post->ID );
-        $ret .= '<p><a href="'. get_the_permalink() .'">'. get_the_title() ;
+        $ret .= '<p style="margin-top:-15px"><a style="text-decoration:none;" href="'. get_the_permalink() .'">'. get_the_title() ;
         if ($place && $place != '') $ret .=  ', ' . $place . '' ;
-        if ($partage_img != '')  $ret .= '<img src="'. $partage_img .'" alt="" />';
+        if ($partage_img != '')  $ret .= '<img style="margin-top:5px;" src="'. $partage_img .'" alt="" />';
         $ret .= '</a></p>';
 
 
@@ -993,6 +997,31 @@ add_filter( 'posts_search', 'advanced_custom_search', 500, 2 );
 
 
 include('functions_participatif.php');
+
+
+function social_meta_properties(){
+
+    $smp =  new stdClass();
+
+    if (is_single()) {
+
+        $smp->title = get_the_title();
+        $smp->description = get_the_excerpt();
+        $smp->image =  thumbnail_of_post_url(get_the_ID(), 'large' );
+        $smp->url = get_the_permalink();
+
+    } else {
+        $smp->title = 'PFTU';
+        $smp->description = get_bloginfo('description');
+        $smp->image =   get_template_directory_uri() . '/images/logo.png';
+        $smp->url = get_home_url();
+    }
+
+
+    return $smp;
+
+
+}
 
 
 ?>
