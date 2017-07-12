@@ -55,6 +55,8 @@
 
     &.icon_link {
         background-image: url('../img/link.svg');
+        height: 38px;
+        vertical-align: top;
     }
     &.icon_download {
         background-image: url('../img/download.svg');

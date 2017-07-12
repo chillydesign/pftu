@@ -1013,7 +1013,6 @@ function social_meta_properties(){
     } else {
         $smp->title = 'PFTU';
         $smp->description = get_bloginfo('description');
-        $smp->image =   get_template_directory_uri() . '/images/logo.png';
         $smp->url = get_home_url();
     }
 

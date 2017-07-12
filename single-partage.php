@@ -45,9 +45,8 @@
                         <img class="partage_image" src="<?php echo $thumbnail_img; ?>"  alt="" />
                     <?php endif; ?>
                     <!-- /post thumbnail -->
-
-    <?php if ($link && $link != '') ?> <a  class="icon_link partage_icon" target="_blank" href="<?php echo add_scheme_to_url($link); ?>"><?php echo $link; ?></a>
-    <?php if ($file && $file['url'] != '') ?><a class="icon_download partage_icon"  target="_blank"  href="<?php echo $file['url']; ?>"> Telecharger </a>
+    <?php if ($link && $link != ''){ ?> <a  class="icon_link partage_icon" target="_blank" href="<?php echo add_scheme_to_url($link); ?>"><?php echo $link; ?></a><?php } ?>
+    <?php if ($file && $file['url'] != '') { ?><a class="icon_download partage_icon"  target="_blank"  href="<?php echo $file['url']; ?>"> Telecharger </a><?php } ?>
 
                 </div>
 

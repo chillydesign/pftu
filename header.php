@@ -36,8 +36,18 @@
 <meta property="og:site_name" content="Go Out! Magazine"/>
 <meta property="og:title" content="<?php echo $smp->title; ?>">
 <meta property="og:description" content="<?php echo $smp->description; ?>">
-<meta property="og:img" content="<?php echo $smp->image; ?>">
-<meta property="og:image" content="<?php echo $smp->image; ?>">
+<?php while (have_posts()) : the_post();
+$featuredImage = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+if($featuredImage){
+	$url=$featuredImage['url'];
+	echo '<meta property="og:image" content="' . $url .'" />';
+	echo '<meta property="og:img" content="' . $url .'" />';
+} else {
+	echo '<meta property="og:image" content="https://plateforme-pftu.org/wp-content/uploads/2017/07/Logo-web-1.png" />';
+	echo '<meta property="og:img" content="https://plateforme-pftu.org/wp-content/uploads/2017/07/Logo-web-1.png" />';
+}
+endwhile;
+wp_reset_query(); ?>
 <meta property="fb:admins" content="333554090408777" />
 
 <!-- TWITTER -->
