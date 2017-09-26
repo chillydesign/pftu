@@ -428,42 +428,6 @@ function webfactorcomments($comment, $args, $depth)
 
 
 
-    add_action('init', 'create_post_type_inscription'); // Add our Inscription Type
-    function create_post_type_inscription()
-    {
-        register_taxonomy_for_object_type('category', 'html5-blank'); // Register Taxonomies for Category
-        register_taxonomy_for_object_type('post_tag', 'html5-blank');
-        register_post_type('inscription', // Register Custom Post Type
-        array(
-            'labels' => array(
-                'name' => __('Inscriptions', 'webfactor'), // Rename these to suit
-                'singular_name' => __('Inscription', 'webfactor'),
-                'add_new' => __('Ajouter', 'webfactor'),
-                'add_new_item' => __('Ajouter Inscription', 'webfactor'),
-                'edit' => __('Modifier', 'webfactor'),
-                'edit_item' => __('Modifier Inscription', 'webfactor'),
-                'new_item' => __('Nouveau Inscription', 'webfactor'),
-                'view' => __('Afficher Inscription', 'webfactor'),
-                'view_item' => __('Afficher Inscription', 'webfactor'),
-                'search_items' => __('Chercher Inscription', 'webfactor'),
-                'not_found' => __('Aucun Inscription trouvé', 'webfactor'),
-                'not_found_in_trash' => __('Aucun Inscription trouvé dans la corbeille', 'webfactor')
-            ),
-            'public' => true,
-            'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
-            'has_archive' => true,
-            'supports' => array(
-                'title',
-                'editor',
-                'excerpt',
-                'thumbnail'
-            ), // Go to Dashboard Custom HTML5 Blank post for supports
-            'can_export' => true, // Allows export in Tools > Export
-            'taxonomies' => array(
-            ) // Add Category and Post Tags support
-        ));
-    }
-
 
     // Create 1 Custom Post type for a Demo, called HTML5-Blank
     add_action('init', 'create_post_type_partenaire'); // Add our Partenaire Type
@@ -1036,6 +1000,7 @@ add_filter( 'posts_search', 'advanced_custom_search', 500, 2 );
 
 
 include('functions_participatif.php');
+include('functions_inscription.php');
 
 
 function social_meta_properties(){

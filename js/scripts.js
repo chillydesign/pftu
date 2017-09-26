@@ -41,6 +41,75 @@
 		})
 
 
+        function uniqueArray2(arr) {
+            var a = [];
+            for (var i=0, l=arr.length; i<l; i++)
+                if (a.indexOf(arr[i]) === -1 && arr[i] !== '')
+                    a.push(arr[i]);
+            return a;
+        }
+
+        function choices_arent_numbered_correctly(){
+            var $choices_rows = $('#choices_rows');
+            var $choices = $('input.choice_number', $choices_rows);
+            var $numbers = [];
+            for (var i = 0; i < $choices.length; i++) {
+                var $choice = $choices[i];
+                var $number = parseInt($choice.value, 10);
+                if (  $number > 0 ){
+                  $numbers.push(  $number  );
+                }
+
+            }
+
+            var $unique_numbers = uniqueArray2($numbers);
+
+
+
+
+            console.log( $numbers.length, $choices.length, $unique_numbers.length   );
+
+            return ($numbers.length == $choices.length  &&
+                    $unique_numbers.length == $numbers.length      );
+
+        }
+
+
+        // INSCRIPTION FORM
+        var $inscription_submit_button = $('#inscription_submit_button');
+        var $inscription_form = $('#inscription_form');
+        var $input_first_name = $('#input_first_name');
+        var $input_last_name = $('#input_last_name');
+        var $input_email = $('#input_email');
+
+
+        if ($inscription_form.length > 0) {
+
+            $inscription_submit_button.prop("disabled", true  );
+
+
+            // disable form if email, or name is blank
+            $('input', $inscription_form).on('keyup change', function(){
+
+                var $carc = choices_arent_numbered_correctly();
+                // are all the numbers filled and unique
+
+                if ( $input_first_name.val() == '' ||
+                    $input_last_name.val() == '' ||
+                    $input_email.val() == '' ||
+                    $carc == false
+                ) {
+                        $inscription_submit_button.prop("disabled", true  );
+                } else {
+                    $inscription_submit_button.prop("disabled", false  );
+                }
+            })
+
+
+        }
+        // END OF INSCRIPTION FORM
+
+
 
 
 		var $slide_count = Math.floor( $window.width() / 260  );

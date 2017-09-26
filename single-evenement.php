@@ -22,18 +22,28 @@
                     <?php $link = get_field('link'); ?>
                     <?php $description = get_field('description'); ?>
                     <?php $file = get_field('file'); ?>
+                    <?php $start_date = get_field('start_date'); ?>
+                    <?php $end_date = get_field('end_date'); ?>
+                    <?php $location = get_field('location'); ?>
+
+
+                    <?php $custom_text = get_field('custom_text'); ?>
+
+                    <?php $number_of_possible_applicants = get_field('number_of_possible_applicants'); ?>
+
+
 
                     <h1>
                         <?php the_title(); ?>
                     </h1>
 
 							<div class="details">
-								<?php if(get_field('start_date')){ ?>
-									<p><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo get_field('start_date'); ?>
-									<?php if(get_field('end_date')){?> - <?php echo get_field('end_date'); } ?></p>
+								<?php if($start_date){ ?>
+									<p><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $start_date; ?>
+									<?php if($end_date){?> - <?php echo $end_date; } ?></p>
 								<?php } ?>
-								<?php if(get_field('location')){ ?>
-									<p><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo get_field('location'); ?> </p>
+									<?php if($location & $location != '' ){ ?>
+									<p><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $location; ?> </p>
 								<?php } ?>
 
 							</div>
@@ -41,11 +51,15 @@
                     <?php if ($description && $description != "") :  ?>
                         <p><?php echo  $description ; ?></p>
                     <?php endif; ?>
-						 	<h6><a href="#">Inscription</a></h6>
+		
 
 
 
-                    <?php //comments_template(); ?>
+
+
+                    <?php if( 1 <  $number_of_possible_applicants  ) : ?>
+                        <?php  get_template_part('inscription-form');    // INSCRIPTION FORM ?>
+                    <?php endif; ?>
 
 
                     <?php edit_post_link(); // Always handy to have Edit Post Links available ?>
