@@ -81,6 +81,7 @@
         var $input_first_name = $('#input_first_name');
         var $input_last_name = $('#input_last_name');
         var $input_email = $('#input_email');
+        var $form_alert = $('#form_alert').hide();
 
 
         if ($inscription_form.length > 0) {
@@ -99,11 +100,15 @@
                     $input_email.val() == '' ||
                     $carc == false
                 ) {
-                        $inscription_submit_button.prop("disabled", true  );
+                    $inscription_submit_button.prop("disabled", true  );
+                    $form_alert.show();
                 } else {
                     $inscription_submit_button.prop("disabled", false  );
+                    $form_alert.hide();
                 }
-            })
+            });
+
+
 
 
         }

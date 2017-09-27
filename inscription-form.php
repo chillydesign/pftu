@@ -2,9 +2,6 @@
 
 
 
-<div class="" style="padding:30px;background:#f1f1f1;margin:30px 0;">
-    <h3>Inscription</h3>
-
 <form id="inscription_form"  action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post"  enctype="multipart/form-data">
 
 
@@ -60,16 +57,18 @@
         <h3 style="margin-top:20px;"><?php _e( 'Je participe au repas de midi', 'webfactor' ); ?></h3>
         <div >
             <label class="radio_label" ><?php _e( 'Oui', 'webfactor' ); ?><input type="radio" name="repas" value="oui"> </label>
-            <label class="radio_label" ><?php _e( 'Non', 'webfactor' ); ?><input type="radio" name="repas" value="non"> </label>
+            <label class="radio_label" ><?php _e( 'Non', 'webfactor' ); ?><input type="radio" checked name="repas" value="non"> </label>
         </div>
 
 
 
     <input type="hidden" name="action" value="inscription_form">
+    <input type="hidden" name="event_id" value="<?php echo get_the_ID(); ?>">
     <div id="inscription_submit_button_outer" style="margin-top:30px;">
         <input id="inscription_submit_button" type="submit" value="<?php _e( 'Inscrivez-vous', 'webfactor' ); ?>">
     </div>
 
+    <p id="form_alert" class="alert_message alert_error">Veuillez remplir tous les champs obligatoires pour valider votre inscription. Pensez à bien numéroter tous les ateliers par ordre de préférence.</p>
+
 
 </form>
-</div>

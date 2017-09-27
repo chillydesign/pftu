@@ -44,6 +44,34 @@ function create_post_type_inscription()
 }
 
 
+add_action( 'manage_posts_extra_tablenav', 'add_download_link'  );
+function add_download_link($which){
+
+    if ( is_post_type_archive('inscription') ) {
+        if($which == 'bottom'){
+            $download_link = get_home_url() . '/api/v1/?inscriptions'  ;
+            echo '<div class="alignleft actions"><a class="action button-primary button" href="'. $download_link .'">Télécharger CSV</a></div>';
+        }
+    }
+
+}
+
+
+function inscription_meta_box_markup(){
+
+    $download_link = get_home_url() . '/api/v1/?inscriptions&id=' . $_GET['post'] ;
+    echo '<div class=" "><a style="display:block;text-align:center" class="action button-primary button" href="'. $download_link .'">Télécharger les inscriptions (csv)</a></div>';
+
+}
+
+function add_inscription_meta_box()
+{
+    add_meta_box("inscriptions-meta-box", " Inscriptions", "inscription_meta_box_markup", "evenement", "side", "high", null);
+}
+
+add_action("add_meta_boxes", "add_inscription_meta_box");
+
+
 
 
 function inscription_fields(){
@@ -83,6 +111,8 @@ $referer =  explode('?',   $referer)[0];
     if ( isset($_POST['action'])  && $_POST['action'] == 'inscription_form'   ) {
 
 
+        $event_id = $_POST['event_id'];
+
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $email = $_POST['email'];
@@ -119,7 +149,8 @@ $referer =  explode('?',   $referer)[0];
                 'post_title'   => $first_name . ' ' . $last_name,
                 'post_status'  => 'publish',
                 'post_type'    => 'inscription',
-                'post_content' => ''
+                'post_content' => '',
+                'post_parent' =>  $event_id
 
             );
 

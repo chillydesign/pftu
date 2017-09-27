@@ -1,4 +1,4 @@
-<h2>Actualites</h2>
+<h2>Vu ailleurs</h2>
 
 
 <div id="news_outer">
