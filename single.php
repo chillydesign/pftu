@@ -22,7 +22,7 @@
 					<div class="row">
 						<div class="col-sm-8 white bigcol thirdscol">
 						 <h1><?php the_title(); ?></h1>
-						 <p class="meta"><?php the_time('F j, Y'); ?> </span>
+						 <p class="meta"><?php the_time('j F Y'); ?> </span>
 							 <?php the_content(); // Dynamic Content ?>
 							 <?php edit_post_link(); // Always handy to have Edit Post Links available ?>
 
