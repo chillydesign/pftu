@@ -81,7 +81,7 @@
                         <?php edit_post_link(); // Always handy to have Edit Post Links available ?>
                     </div>
 
-
+                    <?php if(get_field('practical') OR has_post_thumbnail() OR $link && $link != ''){ ?>
                     <div class="col-sm-4 primary smallcol thirdscol">
                         <?php if (get_field('practical')){ echo '<h3>Informations pratiques</h3>' . get_field('practical');} ?>
 
@@ -96,6 +96,7 @@
 
 
                     </div>
+                    <?php } ?>
 
                 </div> <!-- END OF ROW -->
 

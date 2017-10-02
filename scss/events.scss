@@ -66,6 +66,13 @@
             padding-left: 50px;
             top: -10px;
             position: relative;
+            a {
+              text-decoration: none;
+              &:hover {
+                  text-decoration: underline;
+                  background: white;
+              }
+            }
 
             h4 {
                 font-size: 2em;

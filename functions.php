@@ -750,7 +750,7 @@ function webfactorcomments($comment, $args, $depth)
         // $end_date = get_field('end_date', $post->ID);
         $events_text .= '<li class="single_event">
         <div class="single_event_inner">
-        <h4>' . get_the_title() .'</h4>
+        <a href="'. get_the_permalink() .'"><h4>' . get_the_title() .'</h4></a>
         <div class="event_content">'.  apply_filters('the_content', get_the_content())   .'</div>
         </div>
         </li>';
