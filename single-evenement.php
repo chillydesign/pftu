@@ -36,6 +36,7 @@
                     <?php $start_date = get_field('start_date'); ?>
                     <?php $end_date = get_field('end_date'); ?>
                     <?php $location = get_field('location'); ?>
+                    <?php $show_inscription_form = get_field('show_inscription_form'); ?>
 
 
                     <?php $custom_text = get_field('custom_text'); ?>
@@ -64,7 +65,7 @@
                         <?php endif; ?>
 
 
-
+                        <?php if( $show_inscription_form ): ?>
                         <div class="inscription_box" >
                             <h3>Inscription</h3>
                             <?php if(  sizeof($current_inscriptions)  <  intval($number_of_possible_applicants)  ) : ?>
@@ -73,6 +74,9 @@
                                 <p>Plus de places disponibles</p>
                             <?php endif; ?>
                         </div>
+                        <?php endif; ?>
+
+
 
                         <?php edit_post_link(); // Always handy to have Edit Post Links available ?>
                     </div>
