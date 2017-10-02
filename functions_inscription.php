@@ -287,7 +287,7 @@ function send_inscription_emails($data, $choices){
     $paragraph_for_admin .= '<p><b>Participation au repas de midi </b> : ' . $data['repas']  . '</p>';
     $email_subject_for_admin = 'Nouvelle inscription pour l’évènement ' . $event_title;
     $email_content_for_admin = $emailheader  . $paragraph_for_admin  . $emailfooter;
-    wp_mail( 'harvey.charles@gmail.com' , $email_subject_for_admin, $email_content_for_admin, $headers );
+    wp_mail( 'patricia.naegeli@hesge.ch' , $email_subject_for_admin, $email_content_for_admin, $headers );
 
 
 
