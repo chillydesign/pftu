@@ -112,6 +112,7 @@ $referer =  explode('?',   $referer)[0];
 
 
         $event_id = $_POST['event_id'];
+        $event_title = $_POST['event_title'];
 
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
@@ -170,26 +171,40 @@ $referer =  explode('?',   $referer)[0];
                     endif;
                 endforeach;
 
+                $first_choice = $second_choice = $third_choice = $fourth_choice = $fifth_choice = false;
+
 
                 foreach ($choices as $choice) {
                     if ($choice != false) {
 
                         $score = $choice[0];
                         $choice_name = $choice[1];
-                              if ($score == 1) {
+                         if ($score == 1) {
+                              $first_choice = $choice_name;
                             update_field( 'choix_1', $choice_name,  $new_inscription  );
                         } elseif ($score == 2) {
+                             $second_choice = $choice_name;
                             update_field( 'choix_2', $choice_name,  $new_inscription  );
                         } elseif ($score == 3) {
+                            $third_choice = $choice_name;
                             update_field( 'choix_3', $choice_name,  $new_inscription  );
                         } elseif ($score == 4) {
+                            $fourth_choice = $choice_name;
                             update_field( 'choix_4', $choice_name,  $new_inscription  );
                         } elseif ($score == 5) {
+                            $fifth_choice = $choice_name;
                             update_field( 'choix_5', $choice_name,  $new_inscription  );
                         }
 
                     }
                 }
+
+
+                $all_choices = array($first_choice, $second_choice, $third_choice, $fourth_choice, $fifth_choice);
+
+                // SEND EMAILS TO THE ADMIN AND THE PERSON WHO SUBMITTED
+                send_inscription_emails( $_POST , $all_choices );
+
 
 
 
@@ -235,6 +250,62 @@ function inscription_add_file_upload($artist_file, $parent){
     return $attach_id;
 
 }
+
+
+
+function send_inscription_emails($data, $choices){
+
+     $event_title = $data['event_title'];
+
+    $headers = 'From: PFTU <no-reply@plateforme-pftu.org>' . "\r\n";
+    $headers .= 'Reply-To: PFTU <patricia.naegeli@hesge.ch>' . "\r\n";
+    $emailheader = file_get_contents(dirname(__FILE__) . '/emails/email_header.php');
+    $emailfooter = file_get_contents(dirname(__FILE__) . '/emails/email_footer.php');
+    add_filter('wp_mail_content_type',create_function('', 'return "text/html"; '));
+
+
+
+
+    $paragraph_for_admin = '<p>Nouvelle inscription pour l’évènement '.  $event_title .'</p><br /><br />';
+
+    $paragraph_for_admin .= '<p><b>Prénom</b> : ' . $data['first_name']. '</p>';
+    $paragraph_for_admin .= '<p><b>Nom</b> : ' .$data['last_name'] . '</p>';
+    $paragraph_for_admin .= '<p><b>Adresse électronique</b> ' . $data['email'] . '</p>';
+    $paragraph_for_admin .= '<p><b>Institution</b> : ' . $data['institution'] . '</p>';
+    $paragraph_for_admin .= '<p><b>Fonction</b> : ' . $data['fonction']  . '</p>';
+
+    $paragraph_for_admin  .= '<p>';
+    $c = 1;
+    foreach ($choices as $choice) {
+        if ($choice){
+            $paragraph_for_admin .= '<b>Choix '. $c. '</b> : ' . $choice  . '<br />';
+        }
+        $c++;
+    }
+    $paragraph_for_admin  .= '</p>';
+
+    $paragraph_for_admin .= '<p><b>Participation au repas de midi </b> : ' . $data['repas']  . '</p>';
+    $email_subject_for_admin = 'Nouvelle inscription pour l’évènement ' . $event_title;
+    $email_content_for_admin = $emailheader  . $paragraph_for_admin  . $emailfooter;
+    wp_mail( 'harvey.charles@gmail.com' , $email_subject_for_admin, $email_content_for_admin, $headers );
+
+
+
+    $paragraph_for_user = '<p>Bonjour,</p><p>Votre inscription a bien été enregistrée pour l’évènement '.  $event_title . '</p><p>Bien cordialement, <br/> L’équipe PFTU</p>';
+    $email_subject_for_user = 'PFTU  - Inscription à l’évènement  ' . $event_title;
+    $email_content_for_user = $emailheader . $paragraph_for_user .  $emailfooter;
+
+    wp_mail( $_POST['email'], $email_subject_for_user, $email_content_for_user, $headers );
+
+
+
+    remove_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+
+
+
+}
+
+
 
 
 
