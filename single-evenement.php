@@ -61,7 +61,7 @@
                         </div>
 
                         <?php if ($description && $description != "") :  ?>
-                            <p><?php echo  $description ; ?></p>
+                            <div><?php echo  $description ; ?></div>
                         <?php endif; ?>
 
 

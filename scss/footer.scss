@@ -62,11 +62,27 @@ footer a {
 		vertical-align: middle;
 	}
 
-	.interreg {display:block; text-align: right;}
+	.interreg {
+		display: inline-block;
+    min-width: 200px;
+    margin: 50px 2% 15px;
+		width: 100%;
+	}
+
+	@media(min-width: 676px){
+		.interreg {
+			float: right;
+			margin: 8px 2% 15px!important;
+			width: 45%;
+			text-align: right;
+	}
+	}
+
 	.interreg img {
 	    max-width: 350px;
 	}
 }
+
 
 .footerbottom {
 	padding: 25px;
@@ -74,8 +90,4 @@ footer a {
 	position: relative;
 	z-index: 2;
 	a:link, a:visited, a:active {color: white;}
-}
-
-@media (max-width: 768px) {
-	.interreg {margin-top: 40px; text-align: left !important;}
 }

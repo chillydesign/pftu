@@ -3,12 +3,13 @@
 
 				<div class="footertop">
 					<div class="row">
-						<div class="col-sm-8">
+						<div class="col-sm-7">
 							<nav><?php webfactor_footer_nav(); ?></nav>
 							<p><strong>Partager</strong> <a href="#" id="facebook"></a><a href="#" id="twitter"></a><a href="#" id="linkedin"></a></p>
 						</div>
-						<div class="col-sm-4">
-						<a href="#" class="interreg"><img alt="Un projeet Interreg" src="<?php echo get_template_directory_uri();?>/img/interreg-logo-grey.png"></a>
+						<div class="col-sm-5">
+						<a href="#" class="interreg"><img alt="Confédération Helvétique" src="<?php echo get_template_directory_uri();?>/img/confederation-logo-grey.png"></a>
+						<a href="#" class="interreg"><img alt="Un projet Interreg" src="<?php echo get_template_directory_uri();?>/img/interreg-logo-grey.png"></a>
 						</div>
 					</div>
 				</div>
