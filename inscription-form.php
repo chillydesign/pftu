@@ -60,7 +60,7 @@
             <label class="radio_label" ><?php _e( 'Non', 'webfactor' ); ?><input type="radio" checked name="repas" value="non"> </label>
         </div>
       <?php else : ?>
-        <label class="radio_label" style="display:none;"><?php _e( 'Non', 'webfactor' ); ?><input type="radio" checked name="repas" value="non">
+            <input type="hidden" name="repas" value="non">
       <?php endif; ?>
 
 
