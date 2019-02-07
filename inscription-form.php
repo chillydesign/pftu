@@ -53,13 +53,15 @@
 
 
 
-
+        <?php if(get_field('meal')) : ?>
         <h3 style="margin-top:20px;"><?php _e( 'Je participe au repas de midi', 'webfactor' ); ?></h3>
         <div >
             <label class="radio_label" ><?php _e( 'Oui', 'webfactor' ); ?><input type="radio" name="repas" value="oui"> </label>
             <label class="radio_label" ><?php _e( 'Non', 'webfactor' ); ?><input type="radio" checked name="repas" value="non"> </label>
         </div>
-
+      <?php else : ?>
+        <label class="radio_label" style="display:none;"><?php _e( 'Non', 'webfactor' ); ?><input type="radio" checked name="repas" value="non">
+      <?php endif; ?>
 
 
     <input type="hidden" name="action" value="inscription_form">

@@ -92,7 +92,7 @@
                         <?php endif; ?>
                         <!-- /post thumbnail -->
                         <?php if ($link && $link != ''){ ?> <a  class="icon_link evenement_icon" target="_blank" href="<?php echo add_scheme_to_url($link); ?>"><?php echo $link; ?></a><?php } ?>
-                        <?php if ($file && $file['url'] != '') { ?><a class="icon_download partage_icon"  target="_blank"  href="<?php echo $file['url']; ?>"> Telecharger la brochure </a><?php } ?>
+                        <?php if ($file && $file['url'] != '') { ?><a class="icon_download partage_icon"  target="_blank"  href="<?php echo $file['url']; ?>"> Télécharger la brochure </a><?php } ?>
 
 
                     </div>
