@@ -112,7 +112,7 @@ function webfactor_footer_nav()
 }
 
 function wf_version(){
-    return '0.0.4';
+    return '0.0.5';
 }
 
 // Load HTML5 Blank scripts (header.php)

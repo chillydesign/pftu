@@ -186,32 +186,46 @@ var myMapOptions = {
 
 	function get_map($location, $element){
 
-		var mapcontainer =  $element;
-				mapcontainer.css({
-						width : '100%',
-						height : 370
-				})
+        var mapcontainer =  $element;
+        mapcontainer.css({
+            width : '100%',
+            height : 370
+        })
 
 
-				geocoder = new google.maps.Geocoder();
-				var address = $location;
+        var latlng = $location.split(',');
+        if (latlng.length > 1) {
+            var latitude = latlng[0];
+            var longitude = latlng[1];
+            var latlng = new google.maps.LatLng(  latitude , longitude);
+            var map = new google.maps.Map(mapcontainer.get(0), myMapOptions);
 
-				var map = new google.maps.Map(mapcontainer.get(0), myMapOptions);
+            map.setCenter(latlng);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: latlng,
+                title: 'PFTU'
+            });
+
+        }
 
 
-
-				geocoder.geocode( { 'address': address}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					console.log(results);
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
-							map: map,
-							position: results[0].geometry.location,
-							title: 'PFTU'
-					});
-				} else {
-					console.log('Geocode was not successful for the following reason: ' + status);
-				}
-				});
+        // var geocoder = new google.maps.Geocoder();
+        // var address = $location;
+        // var map = new google.maps.Map(mapcontainer.get(0), myMapOptions);
+        // geocoder.geocode( { 'address': address}, function(results, status) {
+        //     if (status == google.maps.GeocoderStatus.OK) {
+        //         console.log(results);
+        //         map.setCenter(results[0].geometry.location);
+        //         var marker = new google.maps.Marker({
+        //             map: map,
+        //             position: results[0].geometry.location,
+        //             title: 'PFTU'
+        //         });
+        //     } else {
+        //         console.log('Geocode was not successful for the following reason: ' + status);
+        //     }
+        //
+        // });
 
 	}
